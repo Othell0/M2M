@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        /*Toolbar*/
+
         setSupportActionBar(toolbar);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,10 +57,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://fir.im/kh4x")));
             }
         });
+
+        /*list*/
         fragments = new ArrayList<>();
         for (String title : titles){
             fragments.add(MainFragment.getInstance(title));
         }
+
+        /*ViewPager*/
+
         viewPager.setOffscreenPageLimit(4);
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -75,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
                 return fragments.size();
             }
         });
+
+
+        /*TabLayout*/
 
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -97,16 +108,16 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id){
             case R.id.action_share_app:
-                ShareUtil.shareText(this,"分享一个很赞的妹纸App，赶紧去和妹子愉快的玩耍吧.. ヾ (o ° ω ° O ) ノ https://github.com/gaolonglong/GankGirl");
-                //Snackbar.make(viewPager,"还没开发呢.. ( ＞ω＜)",Snackbar.LENGTH_SHORT).show();
+                ShareUtil.shareText(this,"分享一个很赞的妹纸App，赶紧去和妹子愉快的玩耍吧.. ヾ (o ° ω ° O ) ノ https://github.com/hanshan716/MM");
+                Snackbar.make(viewPager,"还没开发呢.. ( ＞ω＜)", Snackbar.LENGTH_SHORT).show();
                 break;
             case R.id.action_about_app:
                 startActivity(new Intent(this,AboutApp.class));
-                //Snackbar.make(viewPager,"还没开发呢.. ( ＞ω＜)",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(viewPager,"还没开发呢... ( ＞ω＜)",Snackbar.LENGTH_SHORT).show();
                 break;
             case R.id.action_about_me:
                 startActivity(new Intent(this,AboutMe.class));
-                //Snackbar.make(viewPager,"什么都没有.. ヾ (o ° ω ° O ) ノ",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(viewPager,"什么都没有...ヾ (o ° ω ° O ) ノ",Snackbar.LENGTH_SHORT).show();
                 break;
         }
 
