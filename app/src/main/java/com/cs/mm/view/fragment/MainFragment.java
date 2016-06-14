@@ -1,7 +1,6 @@
 package com.cs.mm.view.fragment;
 
 import android.annotation.TargetApi;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,12 +39,10 @@ import rx.schedulers.Schedulers;
 /**
  * Created by exbbefl on 6/12/2016.
  */
-public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener {
-    @BindView(R.id.no_network)
-    LinearLayout noNetwork;
-    @BindView(R.id.recycler_view)
-    EasyRecyclerView recyclerView;
+public class MainFragment extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener {
 
+    private EasyRecyclerView recyclerView;
+    private LinearLayout noWIFILayout;
 
     private List<GanHuo.Result> ganHuoList;
     private GanHuoAdapter ganHuoAdapter;
@@ -59,22 +56,12 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     //iOSList;androidList;welfareList;videoList;
 
 
-    public static MainFragment getInstance(String title){
-        MainFragment mainFragment = new MainFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("title",title);
-        mainFragment.setArguments(bundle);
-        return mainFragment;
-    }
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         title = bundle.getString("title");
     }
-
 
     @Nullable
     @Override
@@ -85,6 +72,20 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         ButterKnife.bind(this, view);
         return view;
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    public static MainFragment getInstance(String title){
+        MainFragment mainFragment = new MainFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("title",title);
+        mainFragment.setArguments(bundle);
+        return mainFragment;
+    }
+
 
     @TargetApi(Build.VERSION_CODES.M)
     private void initView(View view) {
@@ -124,12 +125,12 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     jumpActivity(intent,adapter,position);
                 }
             }
-          
+
 
 
         });
 
-    
+
     }
 
     private void jumpActivity(Intent intent, RecyclerArrayAdapter<GanHuo.Result> adapter, int position) {
@@ -216,12 +217,6 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         },1000);
 
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
 
 
 }

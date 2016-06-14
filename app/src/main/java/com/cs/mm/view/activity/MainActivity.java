@@ -22,19 +22,11 @@ import com.cs.mm.view.fragment.MainFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.tab_layout)
-    TabLayout tabLayout;
-    @BindView(R.id.view_pager)
-    ViewPager viewPager;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
+
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
     private List<Fragment> fragments;
     private String[] titles = {"福利","Android","iOS","休息视频"};
 
@@ -42,30 +34,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
 
         init();
+
     }
 
     private void init() {
-        /*Toolbar*/
-
+        //Toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //FloatingActionButton
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://fir.im/kh4x")));
             }
         });
 
-        /*list*/
+        //List
         fragments = new ArrayList<>();
         for (String title : titles){
             fragments.add(MainFragment.getInstance(title));
         }
 
-        /*ViewPager*/
-
+        //ViewPager
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setOffscreenPageLimit(4);
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -84,9 +79,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        /*TabLayout*/
-
+        //TabLayout
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
     }
 
