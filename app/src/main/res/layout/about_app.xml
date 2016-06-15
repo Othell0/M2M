@@ -56,7 +56,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="妹纸App是gank.io的第三方客户端。 \ngank.io是一个致力于为广大开发者分享最新，最潮和实用干货的一个社区。另外，每天一张妹子图，极大的缓解开发者的疲惫，顿时满血复活。\n\n当然，目前像这样的优秀的第三方客户端已经非常多了。感谢那些默默为开源作出努力的开发者，你知道这个App的完成也是站在巨人的肩膀上。"
+                android:text="@string/profile"
                 android:background="#FFFFFF"
                 android:padding="10dp"
                 android:lineSpacingExtra="6dp"
@@ -66,9 +66,40 @@
                 android:layout_marginRight="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <TextView
+                android:text="--来俊臣《罗织经》"
+                android:background="#FFFFFF"
+                android:gravity="right"
+                android:padding="0dp"
+                android:lineSpacingExtra="6dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="扫描二维码 下载APP"
+                android:gravity="center_horizontal"
+                android:background="#FFFFFF"
+                android:padding="10dp"
+                android:lineSpacingExtra="6dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/qr_code"
+
+                />
+
 
             <TextView
-                android:text="开源地址：\nhttps://github.com/gaolonglong/GankGirl"
+                android:text="使用到的开源库：\nRetrofit\nGlide\nRxJava RxAndroid\nEasyRecyclerView\nCircleImageView\nPhotoView"
                 android:background="#FFFFFF"
                 android:padding="10dp"
                 android:lineSpacingExtra="6dp"
@@ -77,16 +108,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:text="使用到的开源库：\nRetrofit\nGlide\nRxJava RxAndroid\nEasyRecyclerView\nCircleImageView\nPhotoView\nWang.avi"
-                android:background="#FFFFFF"
-                android:padding="10dp"
-                android:lineSpacingExtra="6dp"
-                android:layout_margin="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:text="gaolonglong 2016  GankGirl V1.0"
+                android:text="@string/app_info"
                 android:background="#FFFFFF"
                 android:padding="10dp"
                 android:gravity="center"

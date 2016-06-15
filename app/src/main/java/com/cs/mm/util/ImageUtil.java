@@ -19,7 +19,7 @@ import java.io.IOException;
 public class ImageUtil {
     public static Uri saveImage(Context context, String url, Bitmap bitmap, ImageView imageView, String tag){
         //妹纸保存路径
-        String imgDir = Environment.getExternalStorageDirectory().getPath() + "/GankGirl";
+        String imgDir = Environment.getExternalStorageDirectory().getPath() + "/M2M";
         //图片名称处理
         String[] fileNameArr = url.substring(url.lastIndexOf("/") + 1).split("\\.");
         String fileName = fileNameArr[0] + ".png";
@@ -35,7 +35,7 @@ public class ImageUtil {
             boolean compress = bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
             if (tag.equals("save")){
                 if (compress){
-                    Snackbar.make(imageView,"妹纸已经躺在图库等你了... ",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(imageView,"妹纸已经在相册等你了... ",Snackbar.LENGTH_SHORT).show();
                 }else {
                     Snackbar.make(imageView,"妹纸残忍地拒绝了你的请求... ",Snackbar.LENGTH_SHORT).show();
                 }

@@ -9,22 +9,19 @@ import com.cs.mm.R;
 import com.cs.mm.model.GanHuo;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 
-import butterknife.BindView;
-
 /**
  * Created by exbbefl on 6/12/2016.
  */
 public class MeiZhiViewHolder extends BaseViewHolder<GanHuo.Result> {
-    @BindView(R.id.image)
-    ImageView image;
+    private ImageView image;
 
     public MeiZhiViewHolder(ViewGroup parent) {
         super(parent, R.layout.meizhi_item);
+        image = $(R.id.image);
     }
 
-
     @Override
-    public void setData(GanHuo.Result data){
+    public void setData(GanHuo.Result data) {
         super.setData(data);
         Glide.with(getContext())
                 .load(data.getUrl())
@@ -32,3 +29,4 @@ public class MeiZhiViewHolder extends BaseViewHolder<GanHuo.Result> {
                 .into(image);
     }
 }
+

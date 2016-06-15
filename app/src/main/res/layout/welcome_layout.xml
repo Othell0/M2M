@@ -10,7 +10,7 @@
         android:layout_height="match_parent"/>
 
     <TextView
-        android:text="MM  V2.33 \n willowlikep1ne"
+        android:text="    MM  V2.33 \n willowlikep1ne "
         android:textColor="#FFFFFF"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="20dp"
