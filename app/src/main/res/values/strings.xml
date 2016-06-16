@@ -3,4 +3,5 @@
     <string name="action_settings">Settings</string>
     <string name="app_info">$2016  M2M V2.33</string>
     <string name="profile">人之情多矫，世之俗多伪，岂可信乎？     </string>
+    <string name="title_activity_share_to_wechat">ShareToWechat</string>
 </resources>

@@ -8,17 +8,30 @@ import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.webkit.WebView;
 
+
 /**
  * Created by exbbefl on 6/12/2016.
  */
 public class ShareUtil {
+
     public static void shareText(Context context, String text){
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");//纯文本
 
         intent.putExtra(Intent.EXTRA_TEXT,text);
-        context.startActivity(Intent.createChooser(intent,"分享干货"));
+        context.startActivity(Intent.createChooser(intent,"分享资源"));
     }
+/*
+
+    public static void shareToWechat(Context context, String text){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");//纯文本
+
+        intent.putExtra(Intent.EXTRA_TEXT,text);
+        startActivity(ShareToWechat.class);
+    }
+*/
+
 
     public static void shareImage(Context context, Uri uri){
         Intent intent = new Intent(Intent.ACTION_SEND);

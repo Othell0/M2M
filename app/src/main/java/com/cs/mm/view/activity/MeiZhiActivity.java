@@ -51,18 +51,22 @@ public class MeiZhiActivity extends AppCompatActivity{
 
     private void getData() {
         Intent intent = getIntent();
-        desc = intent.getStringExtra("desc");
+        /*desc = intent.getStringExtra("desc");*/
         url = intent.getStringExtra("url");
     }
 
     private void initView() {
         //Toolbar
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_white_24dp);
-        getSupportActionBar().setTitle(desc);
+        getSupportActionBar().setTitle("上车，上车");
+
+
         //ImageView
+
         image = (ImageView) findViewById(R.id.image_meizhi);
         attacher = new PhotoViewAttacher(image);
         Glide.with(this)

@@ -86,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.action_share_app:
-                ShareUtil.shareText(this, "分享一个很赞的App，让更多的人上车吧～(￣▽￣～)(～￣▽￣)～ ノ https://github.com/hanshan716/MM");
-                Snackbar.make(viewPager, "还没开发呢.. ( ＞ω＜)", Snackbar.LENGTH_SHORT).show();
+                ShareUtil.shareText(this, "分享一个很赞的App，让更多的人上车吧～(￣▽￣～)(～￣▽￣)～ ノ http://fir.im/Othello");
+                /*Snackbar.make(viewPager, "还没开发呢.. ( ＞ω＜)", Snackbar.LENGTH_SHORT).show();*/
                 break;
             case R.id.action_about_app:
                 startActivity(new Intent(this, AboutApp.class));

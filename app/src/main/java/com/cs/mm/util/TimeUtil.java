@@ -22,7 +22,7 @@ public class TimeUtil {
                 return minutes + "分钟前";
             }else if (minutes < 60 * 24){
                 return minutes / 60 + "小时前";
-            }else if (minutes < 60 * 24 * 30){
+            }else if (minutes < 60 * 24 * 15){
                 return minutes / (60 * 24) + "天前";
             }else {
                 return "很久很久了...";
