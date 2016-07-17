@@ -36,7 +36,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by exbbefl on 6/12/2016.
  */
-public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,RecyclerArrayAdapter.OnLoadMoreListener {
+public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener {
 
     private EasyRecyclerView recyclerView;
     private LinearLayout noWIFILayout;
@@ -50,10 +50,10 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private Handler handler = new Handler();
     //iOSList;androidList;welfareList;videoList;
 
-    public static MainFragment getInstance(String title){
+    public static MainFragment getInstance(String title) {
         MainFragment mainFragment = new MainFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("title",title);
+        bundle.putString("title", title);
         mainFragment.setArguments(bundle);
         return mainFragment;
     }
@@ -78,13 +78,13 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         noWIFILayout = (LinearLayout) view.findViewById(R.id.no_network);
         recyclerView = (EasyRecyclerView) view.findViewById(R.id.recycler_view);
 
-        if (title.equals("福利")){
-            StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        if (title.equals("福利")) {
+            StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(staggeredGridLayoutManager);
             meiZhiAdapter = new MeiZhiAdapter(getContext());
 
             dealWithAdapter(meiZhiAdapter);
-        }else{
+        } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             ganHuoAdapter = new GanHuoAdapter(getContext());
             //recyclerView.setAdapterWithProgress(ganHuoAdapter);
@@ -98,54 +98,54 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private void dealWithAdapter(final RecyclerArrayAdapter<GanHuo.Result> adapter) {
         recyclerView.setAdapterWithProgress(adapter);
 
-        adapter.setMore(R.layout.load_more_layout,this);
+        adapter.setMore(R.layout.load_more_layout, this);
         adapter.setNoMore(R.layout.no_more_layout);
         adapter.setError(R.layout.error_layout);
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 //Snackbar.make(recyclerView,adapter.getItem(position).getDesc(), Snackbar.LENGTH_SHORT).show();
-                if (title.equals("福利")){
+                if (title.equals("福利")) {
                     Intent intent = new Intent(getContext(), MeiZhiActivity.class);
-                    jumpActivity(intent,adapter,position);
-                }else {
+                    jumpActivity(intent, adapter, position);
+                } else {
                     Intent intent = new Intent(getContext(), GanHuoActivity.class);
-                    jumpActivity(intent,adapter,position);
+                    jumpActivity(intent, adapter, position);
                 }
             }
         });
     }
 
-    private void jumpActivity(Intent intent,RecyclerArrayAdapter<GanHuo.Result> adapter,int position) {
-        intent.putExtra("desc",adapter.getItem(position).getDesc());
-        intent.putExtra("url",adapter.getItem(position).getUrl());
+    private void jumpActivity(Intent intent, RecyclerArrayAdapter<GanHuo.Result> adapter, int position) {
+        intent.putExtra("desc", adapter.getItem(position).getDesc());
+        intent.putExtra("url", adapter.getItem(position).getUrl());
         startActivity(intent);
     }
 
-    private void getData(String type,int count,int page) {
+    private void getData(String type, int count, int page) {
         GankRetrofit.getRetrofit()
                 .create(GankService.class)
-                .getGanHuo(type,count,page)
+                .getGanHuo(type, count, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GanHuo>() {
                     @Override
                     public void onCompleted() {
-                        Log.e("666","onCompleted");
+                        Log.e("666", "onCompleted");
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         noWIFILayout.setVisibility(View.VISIBLE);
-                        Snackbar.make(recyclerView,"NO WIFI，不能愉快的看妹纸啦...",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(recyclerView, "NO WIFI，不能愉快的看妹纸啦...", Snackbar.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onNext(GanHuo ganHuo) {
                         ganHuoList = ganHuo.getResults();
-                        if (title.equals("福利")){
+                        if (title.equals("福利")) {
                             meiZhiAdapter.addAll(ganHuoList);
-                        }else {
+                        } else {
                             ganHuoAdapter.addAll(ganHuoList);
                         }
                     }
@@ -157,18 +157,17 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (title.equals("福利")){
+                if (title.equals("福利")) {
                     meiZhiAdapter.clear();
-                    getData("福利",20,1);
-                }else{
+                    getData("福利", 20, 1);
+                } else {
                     ganHuoAdapter.clear();
-                    if (title.equals("Android")){
-                        getData("Android",20,1);
-                    }else if (title.equals("iOS")){
-                        getData("iOS",20,1);
-                    }
-                    else if (title.equals("休息视频")){
-                        getData("休息视频",20,1);
+                    if (title.equals("Android")) {
+                        getData("Android", 20, 1);
+                    } else if (title.equals("iOS")) {
+                        getData("iOS", 20, 1);
+                    } else if (title.equals("休息视频")) {
+                        getData("休息视频", 20, 1);
                     }
                 }
                 page = 2;
@@ -181,15 +180,14 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (title.equals("福利")){
-                    getData("福利",20,page);
-                }else if (title.equals("Android")){
-                    getData("Android",20,page);
-                }else if (title.equals("iOS")){
-                    getData("iOS",20,page);
-                }
-                else if (title.equals("休息视频")){
-                    getData("休息视频",20,page);
+                if (title.equals("福利")) {
+                    getData("福利", 20, page);
+                } else if (title.equals("Android")) {
+                    getData("Android", 20, page);
+                } else if (title.equals("iOS")) {
+                    getData("iOS", 20, page);
+                } else if (title.equals("休息视频")) {
+                    getData("休息视频", 20, page);
                 }
                 page++;
             }

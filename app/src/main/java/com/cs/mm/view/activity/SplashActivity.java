@@ -1,5 +1,6 @@
 package com.cs.mm.view.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,15 +25,13 @@ import rx.schedulers.Schedulers;
 /**
  * Created by exbbefl on 6/14/2016.
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends Activity {
     private ImageView image;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //全屏显示
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.welcome_layout);
 
         init();
@@ -94,7 +93,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 startActivity(new Intent(SplashActivity.this,MainActivity.class));
 
-                overridePendingTransition(0,0);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
                 SplashActivity.this.finish();
             }
