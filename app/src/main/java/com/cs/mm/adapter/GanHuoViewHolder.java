@@ -34,11 +34,11 @@ public class GanHuoViewHolder extends BaseViewHolder<GanHuo.Result> {
         //干货类型
         type.setText(data.getType());
         //根据干货类型动态替换干货图标
-        if (data.getType().equals("Android")){
+        if (data.getType().equals("Android")) {
             setDrawableLeft(R.drawable.ic_android_black_24dp);
-        }else if (data.getType().equals("iOS")){
+        } else if (data.getType().equals("iOS")) {
             setDrawableLeft(R.drawable.ic_whatshot_black_24dp);
-        }else {
+        } else {
             setDrawableLeft(R.drawable.ic_play_circle_filled_black_24dp);
         }
         //干货贡献者
@@ -47,9 +47,9 @@ public class GanHuoViewHolder extends BaseViewHolder<GanHuo.Result> {
         time.setText(TimeUtil.getFormatTime(data.getPublishedAt()));
     }
 
-    public void setDrawableLeft(int imageId){
+    public void setDrawableLeft(int imageId) {
         Drawable drawable = getContext().getResources().getDrawable(imageId);
-        drawable.setBounds(0,0,drawable.getMinimumWidth(),drawable.getMinimumHeight());
-        type.setCompoundDrawables(drawable,null,null,null);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        type.setCompoundDrawables(drawable, null, null, null);
     }
 }

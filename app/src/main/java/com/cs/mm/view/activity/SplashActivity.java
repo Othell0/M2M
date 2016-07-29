@@ -1,13 +1,15 @@
 package com.cs.mm.view.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -24,8 +26,13 @@ import rx.schedulers.Schedulers;
 /**
  * Created by exbbefl on 6/14/2016.
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends Activity {
+
     private ImageView image;
+
+    private static final float SCALE_END = 1.13F;
+
+    private static final int ANIMATION_DURATION = 2000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,19 +50,19 @@ public class SplashActivity extends AppCompatActivity {
 
         GankRetrofit.getRetrofit()
                 .create(GankService.class)
-                .getGanHuo("福利",1,1)
+                .getGanHuo("福利", 1, 1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GanHuo>() {
                     @Override
                     public void onCompleted() {
-                        Log.e("666","onCompleted");
+                        Log.e("666", "onCompleted");
                         animateImage();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("666","onError");
+                        Log.e("666", "onError");
                         Glide.with(SplashActivity.this)
                                 .load(R.drawable.wall_picture)
                                 .into(image);
@@ -64,7 +71,7 @@ public class SplashActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(GanHuo ganHuo) {
-                        Log.e("666","onNext");
+                        Log.e("666", "onNext");
                         Glide.with(SplashActivity.this)
                                 .load(ganHuo.getResults().get(0).getUrl())
                                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -75,33 +82,23 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void animateImage() {
-        //缩放动画
-        ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f,1.1f,1.0f,1.1f,
-                Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
-        scaleAnimation.setFillAfter(true);
-        scaleAnimation.setDuration(2500);
-        image.startAnimation(scaleAnimation);
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(image, "scaleX", 1f, SCALE_END);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(image, "scaleY", 1f, SCALE_END);
 
-        //缩放动画监听
-        scaleAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
+        AnimatorSet set = new AnimatorSet();
+        set.setDuration(ANIMATION_DURATION).play(animatorX).with(animatorY);
+        set.start();
 
-            }
+        set.addListener(new AnimatorListenerAdapter() {
 
             @Override
-            public void onAnimationEnd(Animation animation) {
+            public void onAnimationEnd(Animator animation) {
 
-                startActivity(new Intent(SplashActivity.this,MainActivity.class));
-
-                overridePendingTransition(0,0);
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
 
                 SplashActivity.this.finish();
-            }
 
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }

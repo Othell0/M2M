@@ -69,7 +69,7 @@ public class MeiZhiActivity extends AppCompatActivity{
 
         image = (ImageView) findViewById(R.id.image_meizhi);
         attacher = new PhotoViewAttacher(image);
-        Glide.with(this)
+        Glide.with(MeiZhiActivity.this)
                 .load(url)
                 .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)

@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * Created by exbbefl on 6/12/2016.
  */
+
 public class GanHuo {
     private boolean error;
     private List<Result> results;

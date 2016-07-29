@@ -50,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
         //ViewPager
         viewPager = (ViewPager) findViewById(R.id.view_pager);
-        viewPager.setOffscreenPageLimit(4);
+        if (viewPager != null) {
+            viewPager.setOffscreenPageLimit(4);
+        }
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -70,7 +72,9 @@ public class MainActivity extends AppCompatActivity {
 
         //TabLayout
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
+        if (tabLayout != null) {
+            tabLayout.setupWithViewPager(viewPager);
+        }
     }
 
 
